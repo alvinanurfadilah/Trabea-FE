@@ -1,0 +1,18 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="input-group mb-3">
+  <span class="input-group-text">Name</span>
+  <input type="text" class="form-control" [formControl]="filterForm.controls.fullName" />
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<div class="d-flex justify-content-between">
+  <button type="button" class="btn btn-success" [routerLink]="['add']">
+    Insert new Part Time Employee
+  </button>
+  <span>found {{ totalRows }} data</span>
+</div>
+
+<app-my-table
+  [tableData]="partTimeEmployees"
+  [columnArray]="columnArray"
+  [totalPages]="totalPages"
+  [formPageNumber]="filterForm.value.pageNumber"
+></app-my-table>

@@ -1,0 +1,30 @@
+<div class="sidebar-footer">
+  <div class="sidebar">
+    <h3>Trabea</h3>
+    <ul>
+      <a [routerLink]="['dashboard']" routerLinkActive="selected"
+        ><li>Dashboard</li></a
+      >
+      @if (roleId == 1) {
+      <a [routerLink]="['part-time-employee']" routerLinkActive="selected"
+        ><li>Part Time Employee</li></a
+      >
+      } @if (roleId == 2) {
+      <a [routerLink]="['work-schedule']" routerLinkActive="selected"
+        ><li>Shift Schedule</li></a
+      >
+      <a [routerLink]="['work-schedule/review']" routerLinkActive="selected"
+        ><li>Review Shift Submission</li></a
+      >
+      } @if (roleId == 3) {
+      <a [routerLink]="['work-schedule']" routerLinkActive="selected"
+        ><li>Shift Schedule</li></a
+      >
+      <a [routerLink]="['work-schedule/add']" routerLinkActive="selected"
+        ><li>Shift Submission</li></a
+      >
+      }
+    </ul>
+  </div>
+  <app-footer></app-footer>
+</div>

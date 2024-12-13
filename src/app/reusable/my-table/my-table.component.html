@@ -1,0 +1,66 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      @for(column of columnArray; track $index) {
+      <th>{{ column.header }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for(data of tableData; track $index) {
+    <tr>
+      @for(column of columnArray; track $index) { @if(column.header == 'Action')
+      {
+      <td>
+        <a [routerLink]="['edit', data[column.fieldName]]">
+          <button type="button" class="btn btn-primary">Edit</button>
+        </a>
+      </td>
+      } @else if (column.header == 'Approval') {
+      <td class="d-flex justify-content-around">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="triggerMethod('yes', data[column.fieldName])"
+        >
+          Y
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="triggerMethod('no', data[column.fieldName])"
+        >
+          N
+        </button>
+      </td>
+      } @else { @if(column.dataType == 'Date') {
+      <td>{{ data[column.fieldName] | date : "dd MMMM yyyy" }}</td>
+      } @else {
+      <td>{{ data[column.fieldName] }}</td>
+      } } }
+    </tr>
+    }
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6">
+        <div class="pagination">
+          <span>Page {{ formPageNumber }} of {{ totalPages }}</span>
+          <div class="d-flex justify-content-end">
+            @for(pageNumber of [].constructor(totalPages); track $index; let
+            index = $index) {
+            <a
+              [class.active]="formPageNumber === index + 1"
+              [routerLink]="['.']"
+              [queryParams]="{ pageNumber: index + 1 }"
+              queryParamsHandling="merge"
+            >
+              <div class="number-of-pagination">{{ index + 1 }}</div>
+            </a>
+            }
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tfoot>
+</table>

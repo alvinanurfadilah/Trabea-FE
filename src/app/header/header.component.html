@@ -1,0 +1,10 @@
+<div class="d-flex justify-content-between">
+  <div class="h4">
+    <xng-breadcrumb [autoGenerate]="false">
+      <ng-container *xngBreadcrumbItem="let breadcrumb">
+        <span [routerLink]="breadcrumb.url">{{ breadcrumb }}</span>
+      </ng-container>
+    </xng-breadcrumb>
+  </div>
+  <a (click)="onLogout()"><span>Logout</span></a>
+</div>

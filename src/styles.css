@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  background-color: #ecf0f1;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+.container-body {
+  padding: 20px;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+table {
+  margin-top: 10px;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5); 
+}

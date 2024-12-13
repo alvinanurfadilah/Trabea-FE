@@ -1,0 +1,89 @@
+<form action="" [formGroup]="formInsert" (ngSubmit)="onSubmit()">
+  @if (id) {
+  <div class="mb-3 mt-3">
+    <label class="form-label">Id</label>
+    <input type="text" class="form-control" value="{{ id }}" disabled />
+  </div>
+  }
+  <div class="mb-3 mt-3">
+    <label class="form-label">First Name*</label>
+    <input
+      type="text"
+      class="form-control"
+      [formControl]="formInsert.controls.firstName"
+      required
+    />
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="mb-3 mt-3">
+    <label class="form-label">Last Name*</label>
+    <input
+      type="text"
+      class="form-control"
+      [formControl]="formInsert.controls.lastName"
+      required
+    />
+  </div>
+  <div class="mb-3 mt-3">
+    <label class="form-label">Email*</label>
+    <input
+      type="email"
+      class="form-control"
+      [formControl]="formInsert.controls.personalEmail"
+      required
+    />
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="mb-3 mt-3">
+    <label class="form-label">Phone Number*</label>
+    <input
+      type="text"
+      class="form-control"
+      [formControl]="formInsert.controls.personalPhoneNumber"
+      required
+    />
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="mb-3 mt-3">
+    <label>Address*</label>
+    <textarea
+      class="form-control"
+      rows="5"
+      [formControl]="formInsert.controls.address"
+      required
+    ></textarea>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="mb-3 mt-3">
+    <label class="form-label">Last Education*</label>
+    <select
+      class="form-select"
+      [formControl]="formInsert.controls.lastEducation"
+      required
+    >
+      <option value="">Choose Last Education</option>
+      @for (edu of educationDropdown; track $index) {
+      <option [value]="edu.value">{{ edu.text }}</option>
+      }
+    </select>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="mb-3 mt-3">
+    <label class="form-label">On Going Education</label>
+    <select
+      class="form-select"
+      [formControl]="formInsert.controls.onGoingEducation"
+    >
+      <option value="">No on-going Education</option>
+      @for (edu of educationDropdown; track $index) {
+      <option [value]="edu.value">{{ edu.text }}</option>
+      }
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

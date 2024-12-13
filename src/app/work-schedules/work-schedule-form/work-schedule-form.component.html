@@ -1,0 +1,44 @@
+<form action="" [formGroup]="formInsert" (ngSubmit)="onSubmit()">
+  <div class="mb-3 mt-3">
+    <label class="form-label">
+      You are eligible to apply for
+      <b>{{ eligibleStartDate | date : "dd MMM yyyy" }}</b> to
+      <b>{{ eligibleEndDate | date : "dd MMM yyyy" }}</b>
+    </label>
+  </div>
+  <div class="mb-3 mt-3">
+    <label class="form-label"
+      >Propesed date (select one in the upcoming week)</label
+    >
+    <input
+      type="date"
+      class="form-control"
+      [formControl]="formInsert.controls.workDate"
+      required
+      matInput
+      [min]="eligibleStartDate"
+      [max]="eligibleEndDate"
+      [matDatepicker]="picker"
+      (input)="getDate($event)"
+    />
+    <mat-datepicker #picker></mat-datepicker>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="mb-3 mt-3">
+    <label class="form-label">Shift</label>
+    <select
+      class="form-select"
+      [formControl]="formInsert.controls.shiftId"
+      required
+    >
+      <option value="0">Pick a Shift</option>
+      @for (shift of shiftDropdown; track $index) {
+      <option [value]="shift.value">{{ shift.text }}</option>
+      }
+    </select>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

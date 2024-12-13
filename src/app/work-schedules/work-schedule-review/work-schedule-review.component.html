@@ -1,0 +1,39 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="input-group mb-3">
+  <span class="input-group-text">Name</span>
+  <input
+    type="text"
+    class="form-control"
+    [formControl]="filterForm.controls.name"
+  />
+  <span class="input-group-text">ShiftId</span>
+  <select class="form-select" [formControl]="filterForm.controls.shiftId">
+    <option value="">All Shifts</option>
+    @for (shift of shiftDropdown; track $index) {
+    <option [value]="shift.value">{{ shift.text }}</option>
+    }
+  </select>
+  <span class="input-group-text">StartDateRange</span>
+  <input
+    type="date"
+    class="form-control"
+    [formControl]="filterForm.controls.startDate"
+  />
+  <span class="input-group-text">EndDateRange</span>
+  <input
+    type="date"
+    class="form-control"
+    [formControl]="filterForm.controls.endDate"
+  />
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<div class="d-flex justify-content-end">
+  <span>found {{ totalRows }} data</span>
+</div>
+
+<app-my-table
+  [tableData]="workScheduleReview"
+  [columnArray]="columnArray"
+  [totalPages]="totalPages"
+  [formPageNumber]="filterForm.value.pageNumber"
+  (getId)="handleApproval($event.action, $event.id)"
+></app-my-table>

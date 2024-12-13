@@ -1,0 +1,120 @@
+<div class="d-flex justify-content-between">
+  <span>
+    Showing {{ buttonNext ? "Current" : "Next" }} Week (
+    {{ startDate | date : "dd MMMM yyyy" }}
+    -
+    {{ endDate | date : "dd MMMM yyyy" }}
+    )
+  </span>
+  <div class="d-flex justify-content-between">
+    <button type="button" class="btn btn-outline-dark" (click)="nextWeek()">
+      Show {{ buttonNext ? "Next" : "Current" }} Week
+    </button>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>
+        <span>Shift 1</span>
+        <span>08:00 - 12:00</span>
+      </th>
+      <th>
+        <span>Shift 2</span>
+        <span>12:00 - 16:00</span>
+      </th>
+      <th>
+        <span>Shift 3</span>
+        <span>16:00 - 20:00</span>
+      </th>
+      <th>
+        <span>Shift 4</span>
+        <span>20:00 - 00:00</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(workSchedule of workSchedules; track $index){
+    <tr>
+      <td>
+        <span>{{ workSchedule.workDate | date : "EEE" }}</span>
+        <span>{{ workSchedule.workDate | date : "dd MMM yyyy" }}</span>
+      </td>
+      <td
+        class="empName"
+        (click)="openModal(workSchedule.shifts[0]?.partTimeEmployeeId)"
+      >
+        {{ workSchedule.shifts[0]?.partTimeEmployee }}
+      </td>
+      <td
+        class="empName"
+        (click)="openModal(workSchedule.shifts[1]?.partTimeEmployeeId)"
+      >
+        {{ workSchedule.shifts[1]?.partTimeEmployee }}
+      </td>
+      <td
+        class="empName"
+        (click)="openModal(workSchedule.shifts[2]?.partTimeEmployeeId)"
+      >
+        {{ workSchedule.shifts[2]?.partTimeEmployee }}
+      </td>
+      <td
+        class="empName"
+        (click)="openModal(workSchedule.shifts[3]?.partTimeEmployeeId)"
+      >
+        {{ workSchedule.shifts[3]?.partTimeEmployee }}
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal" #myModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Part Time Detail</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <table>
+          @if(!partTimeEmployee) {
+          <h6>
+            Part time employee detail on this date and this shift not found.
+            Please choose another date and shift!
+          </h6>
+          } @else {
+          <tr>
+            <th>Full Name:</th>
+            <td>
+              {{ partTimeEmployee?.firstName }} {{ partTimeEmployee?.lastName }}
+            </td>
+          </tr>
+          <tr>
+            <th>Work Email:</th>
+            <td>{{ partTimeEmployee?.workEmail }}</td>
+          </tr>
+          <tr>
+            <th>Personal Email:</th>
+            <td>{{ partTimeEmployee?.personalEmail }}</td>
+          </tr>
+          <tr>
+            <th>Personal Phone Number:</th>
+            <td>{{ partTimeEmployee?.personalPhoneNumber }}</td>
+          </tr>
+          }
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

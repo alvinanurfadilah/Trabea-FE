@@ -1,0 +1,28 @@
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+th span, td span {
+    font-weight: bold;
+    display: block;
+    background-color: white;
+}
+
+th span:nth-child(2), td span:nth-child(2) {
+    font-weight: 400;
+    font-size: small;
+}
+
+td {
+    font-size: small;
+}
+
+table tbody tr .empName {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
